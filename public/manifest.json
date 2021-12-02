@@ -19,7 +19,9 @@
     }
   ],
   "start_url": ".",
+  "display_override": ["window-control-overlay", "minimal-ui"],
   "display": "standalone",
+  "scope": "/",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }

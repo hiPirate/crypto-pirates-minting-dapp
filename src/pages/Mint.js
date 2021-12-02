@@ -1,7 +1,10 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import contract from "../contracts/contract.json";
 import Hero from "../assets/hero.png";
+
+import "../styles/Styles.css";
 
 const initialInfoState = {
   connected: false,
@@ -21,7 +24,7 @@ const initialMintState = {
   cost: "0",
 };
 
-function Minter() {
+function Mint() {
   const [info, setInfo] = useState(initialInfoState);
   const [mintInfo, setMintInfo] = useState(initialMintState);
 
@@ -65,7 +68,7 @@ function Minter() {
     } else {
       setInfo(() => ({
         ...initialInfoState,
-        status: "Please install metamask.",
+        status: "Please install MetaMask.",
       }));
     }
   };
@@ -176,11 +179,30 @@ function Minter() {
   };
 
   const connectToContract = (_contractJSON) => {
-    init("eth_requestAccounts", _contractJSON);
+    try {
+      if(window.ethereum.isMetaMask) {
+        init("eth_requestAccounts", _contractJSON);
+      }
+      else {
+        setInfo(() => ({
+          ...initialInfoState,
+          status: "Please install MetaMask.",
+        }));
+      }
+    }
+    catch(err) {
+      console.log(err);
+      setInfo(() => ({
+        ...initialInfoState,
+        status: "Please install MetaMask.",
+      }));
+    }
   };
 
   useEffect(() => {
+    if (info.connected) {
     connectToContract(contract);
+    }
     initListeners();
   }, []);
 
@@ -192,7 +214,7 @@ function Minter() {
   }, [info.connected]);
 
   return (
-    <div className="page">
+    <div id="mint" className="page">
       <div className="card">
         <div className="card_header colorGradient">
           <img className="card_header_image ns" alt={"banner"} src={Hero} />
@@ -207,7 +229,7 @@ function Minter() {
               }}
             >
               <button
-                disabled={!info.connected || mintInfo.cost == "0"}
+                disabled={!info.connected || mintInfo.cost === "0"}
                 className="small_button"
                 onClick={() => updateAmount(mintInfo.amount - 1)}
               >
@@ -215,7 +237,7 @@ function Minter() {
               </button>
               <div style={{ width: 10 }}></div>
               <button
-                disabled={!info.connected || mintInfo.cost == "0"}
+                disabled={!info.connected || mintInfo.cost === "0"}
                 className="button"
                 onClick={() => mint()}
               >
@@ -223,7 +245,7 @@ function Minter() {
               </button>
               <div style={{ width: 10 }}></div>
               <button
-                disabled={!info.connected || mintInfo.cost == "0"}
+                disabled={!info.connected || mintInfo.cost === "0"}
                 className="small_button"
                 onClick={() => updateAmount(mintInfo.amount + 1)}
               >
@@ -295,6 +317,7 @@ function Minter() {
           }}
           className="_90"
           target="_blank"
+          rel="noreferrer"
           href="https://polygonscan.com/token/0x3fe4477fc24adbe0d9ab4a2b7853e2a3f8440bed"
         >
           View Contract
@@ -304,4 +327,4 @@ function Minter() {
   );
 }
 
-export default Minter;
+export default Mint;

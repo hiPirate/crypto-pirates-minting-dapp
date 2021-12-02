@@ -1,11 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Minter from "./components/Minter";
-import "./styles/styles.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Minter />
+    <App />
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

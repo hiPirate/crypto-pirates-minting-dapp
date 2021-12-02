@@ -4,7 +4,6 @@
   --small-button-bg: #919191;
   --small-button-active-bg: #646464;
   --button-text: #ffffff;
-  --card: #ffffff;
   --accountText: #ffffff;
   --statusText: #470068;
   --bg-gradient_1: #ea6b6aff;
@@ -14,7 +13,7 @@
   --gradient_3: #ffe677ff;
   --success: #24a13f;
   --warning: #ca5824;
-  --error: #ca2f24; 
+  --error: #ca2f24;
 }
 
 * {
@@ -53,15 +52,14 @@ body {
 }
 
 .card {
-  background-color: var(--card);
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
   width: 300px;
   transition: 0.3s;
   margin: 50px;
   position: relative;
+  border: 0;
 }
 
 .card:hover {
@@ -75,8 +73,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+
   position: relative;
 }
 
@@ -100,8 +97,6 @@ body {
 }
 
 .card_footer {
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
   padding: 15px;
   display: flex;
   justify-content: space-between;
